@@ -104,6 +104,7 @@ void	showperm(t_file *file);
 void	showlongfile(t_file *file, t_size size, char *flags);
 int			displayList(t_file **lst, char *flags);
 void	displayMajMin(t_file *file, t_size size);
+char		get_file_acl(char path[PATH_MAX]);
 void	ft_color(mode_t mode);
 void	displayBasic(char *flags, t_file *files);
 void	displayDate(time_t date);

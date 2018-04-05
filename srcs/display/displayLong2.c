@@ -6,14 +6,13 @@
 /*   By: matteo <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 20:16:39 by matteo            #+#    #+#             */
-/*   Updated: 2018/04/05 16:26:45 by matteo           ###   ########.fr       */
+/*   Updated: 2018/04/05 20:22:46 by matteo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../ft_ls.h"
 
-/*
-static char		get_file_acl(char path[PATH_MAX])
+char		get_file_acl(char path[PATH_MAX])
 {
 	acl_t	tmp;
 	char	buf[101];
@@ -26,8 +25,8 @@ static char		get_file_acl(char path[PATH_MAX])
 		return ('+');
 	}
 	return (' ');
-} //
-*/
+} 
+
 void	displayMajMin(t_file *file, t_size size)
 {
 	int		min;

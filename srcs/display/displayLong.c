@@ -6,7 +6,7 @@
 /*   By: matteo <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 20:16:55 by matteo            #+#    #+#             */
-/*   Updated: 2018/04/05 20:04:11 by matteo           ###   ########.fr       */
+/*   Updated: 2018/04/05 20:21:59 by matteo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,29 @@ void	displayLong(char *flags, t_file *files)
 	}
 }
 
+static void		showchmod(int mode, char path[PATH_MAX])
+{
+	char	chmod[11];
+	chmod[0] = (S_IRUSR & mode) ? 'r' : '-';
+	chmod[1] = (S_IWUSR & mode) ? 'w' : '-';
+	chmod[2] = (S_IXUSR & mode) ? 'x' : '-';
+	chmod[3] = (S_IRGRP & mode) ? 'r' : '-';
+	chmod[4] = (S_IWGRP & mode) ? 'w' : '-';
+	chmod[5] = (S_IXGRP & mode) ? 'x' : '-';
+	chmod[6] = (S_IROTH & mode) ? 'r' : '-';
+	chmod[7] = (S_IWOTH & mode) ? 'w' : '-';
+	chmod[8] = (S_IXOTH & mode) ? 'x' : '-';
+	chmod[9] = get_file_acl(path);
+	chmod[10] = '\0';
+	if (S_ISUID & mode)
+		chmod[2] = chmod[2] == '-' ? 'S' : 's';
+	if (S_ISGID & mode)
+		chmod[5] = chmod[5] == '-' ? 'S' : 's';
+	if (S_ISVTX & mode)
+		chmod[8] = chmod[8] == '-' ? 'T' : 't';
+	ft_putstr(chmod);
+}
+
 void	showperm(t_file *file)
 {
 	ft_putchar((S_ISFIFO(file->mode)) ? 'p' : '\0');
@@ -37,16 +60,8 @@ void	showperm(t_file *file)
 	ft_putchar((S_ISREG(file->mode)) ? '-' : '\0');
 	ft_putchar((S_ISLNK(file->mode)) ? 'l' : '\0');
 	ft_putchar((S_ISSOCK(file->mode)) ? 's' : '\0');
-	ft_putchar((file->mode & S_IRUSR) ? 'r' : '-');
-	ft_putchar((file->mode & S_IWUSR) ? 'w' : '-');
-	ft_putchar((file->mode & S_IXUSR) ? 'x' : '-');
-	ft_putchar((file->mode & S_IRGRP) ? 'r' : '-');
-	ft_putchar((file->mode & S_IWGRP) ? 'w' : '-');
-	ft_putchar((file->mode & S_IXGRP) ? 'x' : '-');
-	ft_putchar((file->mode & S_IROTH) ? 'r' : '-');
-	ft_putchar((file->mode & S_IWOTH) ? 'w' : '-');
-	ft_putchar((file->mode & S_IXOTH) ? 'x' : '-');
-	ft_putstr("  ");
+	showchmod(file->mode, file->full_path);
+	ft_putstr(" ");
 }
 
 static void	displayLink(t_file *file)
