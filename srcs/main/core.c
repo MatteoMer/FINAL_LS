@@ -6,7 +6,7 @@
 /*   By: matteo <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/05 16:26:59 by matteo            #+#    #+#             */
-/*   Updated: 2018/04/05 19:24:23 by matteo           ###   ########.fr       */
+/*   Updated: 2018/04/05 19:39:38 by matteo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int		core(t_file *lst, char *flags, int first, int nbArg)
 				free_lst(&lst);
 			}
 		}
-		else if (!(LS_RR) && !first)
-			ft_putendl(tmp->full_path);
+		else if (!(LS_RR))
+			displayList(&lst, flags);
 		tmp = tmp->next;
 	}
 	return (1);

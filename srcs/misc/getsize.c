@@ -6,7 +6,7 @@
 /*   By: matteo <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 20:32:36 by matteo            #+#    #+#             */
-/*   Updated: 2018/04/05 16:27:38 by matteo           ###   ########.fr       */
+/*   Updated: 2018/04/05 19:51:41 by matteo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	get_size_errorhandling(t_size *size, t_file *cur)
 				  > size->userspace ? (int)ft_strlen(getpwuid(cur->st_uid)->pw_name) \
 				  : size->userspace;
 	else
-		size->userspace = (int)ft_strlen(ft_itoa(cur->st_uid)) \
-				  > size->userspace ? (int)ft_strlen(ft_itoa(cur->st_uid)) \
+		size->userspace = nblen(cur->st_uid) \
+				  > size->userspace ? nblen(cur->st_uid) \
 				  : size->userspace;
 	if (getgrgid(cur->st_gid))
 		size->groupspace = (int)ft_strlen(getgrgid(cur->st_gid)->gr_name) \
