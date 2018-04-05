@@ -6,7 +6,7 @@
 /*   By: matteo <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/15 20:16:55 by matteo            #+#    #+#             */
-/*   Updated: 2018/04/05 16:26:36 by matteo           ###   ########.fr       */
+/*   Updated: 2018/04/05 20:04:11 by matteo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,15 @@ void	showperm(t_file *file)
 	ft_putstr("  ");
 }
 
+static void	displayLink(t_file *file)
+{
+	char	buf[PATH_MAX + 1];
+
+	readlink(file->full_path, buf, PATH_MAX);
+	ft_putstr(" -> ");
+	ft_putendl(buf);
+}
+
 void	showlongfile(t_file *file, t_size size, char *flags)
 {
 	showperm(file);
@@ -68,6 +77,10 @@ void	showlongfile(t_file *file, t_size size, char *flags)
 	displayDate(file->time);
 	if (LS_G)
 		ft_color(file->mode);
-	ft_putendl(file->name);
+	ft_putstr(file->name);
 	ft_putstr(C_NONE);
+	if (S_ISLNK(file->mode))
+		displayLink(file);
+	else
+		ft_putendl("");
 }
