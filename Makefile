@@ -6,7 +6,7 @@
 #    By: matteo <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/01/24 23:47:34 by matteo            #+#    #+#              #
-#    Updated: 2018/04/05 19:27:05 by matteo           ###   ########.fr        #
+#    Updated: 2018/04/05 20:38:08 by matteo           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,9 +43,11 @@ $(NAME): $(OBJ)
 	@echo "\033[32mCompilation done :)"
 
 clean:
+	@make clean -C libft
 	rm -Rf $(OBJ)
 
 fclean: clean
+	@make fclean -C libft
 	rm -Rf $(NAME)
 
 re: fclean all
